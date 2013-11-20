@@ -1,21 +1,24 @@
-public class MainClass {
+/**
+ * Class for
+ */
+public class RungeKuttaMethod {
 
-    public static void main(String[] args) {
-        int k = 2;
-        double Xo, Yo, Y1, Zo, Z1;
+    public void run() {
+        int k = 15;                  //количество знаков после запятой приокруглении
+        double Xo, Yo, Y1, Zo, Z1;  //значения переменных в уравнении
         double k1, k2, k4, k3, h;
         double q1, q2, q4, q3;
                 /*
                  *Начальные условия
                  */
         Xo = 0;
-        Yo = 0.8;
-        Zo = 2;
+        Yo = 0;
+        Zo = 0;
 
-        h = 0.1; // шаг
+        h = 0.02; // шаг
 
         System.out.println("\tX\t\tY\t\tZ");
-        for(; r(Xo,2)<1.0; Xo += h){
+        for(; r(Xo,2)<0.2; Xo += h){
 
             k1 = h * f(Xo, Yo, Zo);
             q1 = h * g(Xo, Yo, Zo);
@@ -32,6 +35,7 @@ public class MainClass {
             Z1 = Zo + (k1 + 2.0*k2 + 2.0*k3 + k4)/6.0;
             Y1 = Yo + (q1 + 2.0*q2 + 2.0*q3 + q4)/6.0;
             System.out.println("\t" + r(Xo + h, k) + "\t\t" + r(Y1 ,k) + "\t\t" + r(Z1 ,k));
+            System.out.println();
             Yo = Y1;
             Zo = Z1;
         }
@@ -47,7 +51,7 @@ public class MainClass {
      * функции, которые получаются из системы
      */
     public static double f(double x, double y, double z){
-        return (Math.cos(3*x) - 4*y);
+        return (5*z-6*y-Math.exp(x));
     }
     public static double g(double x, double y, double z){
         return (z);
