@@ -54,7 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jLabelFault = new javax.swing.JLabel();
+        jLabelExactSolution = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -102,31 +102,35 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(300, 50));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setText("Погрешность метода");
+        jLabel14.setText("Точное решение");
 
-        jLabelFault.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelExactSolution.setFont(new java.awt.Font("Tahoma", 0, 12));
+        jLabelExactSolution.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelExactSolution.setIcon(new javax.swing.ImageIcon(getClass().getResource("exactSolution.png")));
+        jLabelExactSolution.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelFault)
-                .addGap(203, 203, 203))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(jLabel14)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabelExactSolution, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel14)
-                .addGap(38, 38, 38)
-                .addComponent(jLabelFault)
-                .addGap(72, 72, 72))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelExactSolution, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jScrollPane3.setViewportView(jPanel2);
@@ -191,8 +195,8 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(23, 23, 23)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -256,15 +260,13 @@ public class MainGUI extends javax.swing.JFrame {
           String value=(String)iteratorResultData.next();
            jTextAreaComparativeResult.append(value);
         }
-        System.out.println(rungeKuttaMethod.getFault());
-        jLabelFault.setText(rungeKuttaMethod.getFault().toString());
                  
     }//GEN-LAST:event_jMenu1MouseClicked
 
     //run procedure for clear all output fields at the form
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         jTextAreaComparativeResult.setText("");
-        jLabelFault.setText("");
+        jLabelExactSolution.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2MouseClicked
 
@@ -323,7 +325,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelFault;
+    private javax.swing.JLabel jLabelExactSolution;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -7,8 +7,6 @@ import java.util.List;
  */
 public class RungeKuttaMethod {
     
-    double fault;
-
     public List run() {
         int k = 13;                  //количество знаков после запятой приокруглении
         double Xo, Yo, Y1, Zo, Z1;  //значения переменных в уравнении
@@ -41,12 +39,11 @@ public class RungeKuttaMethod {
 
             Z1 = Zo + (k1 + 2.0*k2 + 2.0*k3 + k4)/6.0;
             Y1 = Yo + (q1 + 2.0*q2 + 2.0*q3 + q4)/6.0;
-            double x1=Xo+h;
+            Double x1 = Xo+h;
             Double analiticalResult=-Math.exp(2*x1)+0.5*(Math.exp(3*x1)+Math.exp(x1));
             resultData.add(r(Xo + h, k) + "\t" + r(Y1 ,k) + "\t" + r(analiticalResult ,k)+"\n");            
             Yo = Y1;
-            Zo = Z1;
-        setFault(analiticalResult,Yo);
+            Zo = Z1;        
         }
         
         return resultData;
@@ -60,15 +57,6 @@ public class RungeKuttaMethod {
     /**
      * функции, которые получаются из системы
      */
-    public double setFault(Double analiticalResult, Double actualResult){
-        System.out.println();
-        System.out.println(actualResult-analiticalResult);
-        
-        return  (Math.abs(actualResult - analiticalResult) / analiticalResult) * 100;
-    }
-    public Double getFault(){
-        return fault;
-    }
     public static double f(double x, double y, double z){
         return (5*z-6*y+Math.exp(x));
     }
