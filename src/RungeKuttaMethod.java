@@ -1,13 +1,20 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class for
  */
 public class RungeKuttaMethod {
+    
+    double fault;
 
-    public void run() {
-        int k = 15;                  //количество знаков после запятой приокруглении
+    public List run() {
+        int k = 13;                  //количество знаков после запятой приокруглении
         double Xo, Yo, Y1, Zo, Z1;  //значения переменных в уравнении
         double k1, k2, k4, k3, h;
         double q1, q2, q4, q3;
+        
                 /*
                  *Начальные условия
                  */
@@ -17,7 +24,7 @@ public class RungeKuttaMethod {
 
         h = 0.02; // шаг
 
-        System.out.println("\tX\t\tY\t\tZ");
+        List<String> resultData=new ArrayList<String>();
         for(; r(Xo,2)<0.2; Xo += h){
 
             k1 = h * f(Xo, Yo, Zo);
@@ -34,12 +41,15 @@ public class RungeKuttaMethod {
 
             Z1 = Zo + (k1 + 2.0*k2 + 2.0*k3 + k4)/6.0;
             Y1 = Yo + (q1 + 2.0*q2 + 2.0*q3 + q4)/6.0;
-            System.out.println("\t" + r(Xo + h, k) + "\t\t" + r(Y1 ,k) + "\t\t" + r(Z1 ,k));
-            System.out.println();
+            double x1=Xo+h;
+            Double analiticalResult=-Math.exp(2*x1)+0.5*(Math.exp(3*x1)+Math.exp(x1));
+            resultData.add(r(Xo + h, k) + "\t" + r(Y1 ,k) + "\t" + r(analiticalResult ,k)+"\n");            
             Yo = Y1;
             Zo = Z1;
+        setFault(analiticalResult,Yo);
         }
-
+        
+        return resultData;
     }
     /**
      * функция для округления и отбрасывания "хвоста"
@@ -50,8 +60,17 @@ public class RungeKuttaMethod {
     /**
      * функции, которые получаются из системы
      */
+    public double setFault(Double analiticalResult, Double actualResult){
+        System.out.println();
+        System.out.println(actualResult-analiticalResult);
+        
+        return  (Math.abs(actualResult - analiticalResult) / analiticalResult) * 100;
+    }
+    public Double getFault(){
+        return fault;
+    }
     public static double f(double x, double y, double z){
-        return (5*z-6*y-Math.exp(x));
+        return (5*z-6*y+Math.exp(x));
     }
     public static double g(double x, double y, double z){
         return (z);
